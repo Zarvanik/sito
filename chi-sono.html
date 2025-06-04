@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mirbol - Chi Sono</title>
+  <!-- Google Font per logo -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <!-- Font per il sottotitolo -->
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Barra di navigazione -->
+  <nav>
+    <a href="index.html" class="logo">Mirbol</a>
+    <span class="nav-toggle" onclick="toggleNav()">☰</span>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html#home">Home</a>
+      <a href="chi-sono.html">Chi Sono</a>
+      <div class="dropdown-item">
+        <a href="i-miei-lavori.html">I Miei Lavori</a>
+        <div class="submenu submenu-modelli">
+          <a href="i-miei-lavori.html#classica-tradizionale">Classica Tradizionale</a>
+          <a href="i-miei-lavori.html#classica-concert">Classica Concert</a>
+          <a href="i-miei-lavori.html#stratocaster-style">Stratocaster Style</a>
+          <a href="i-miei-lavori.html#telecaster-style">Telecaster Style</a>
+        </div>
+      </div>
+      <div class="dropdown-item">
+        <a href="i-legni.html">I Legni</a>
+        <div class="submenu submenu-legni">
+          <a href="i-legni.html#mogano">Mogano</a>
+          <a href="i-legni.html#palissandro">Palissandro</a>
+          <a href="i-legni.html#acero">Acero</a>
+          <a href="i-legni.html#abete">Abete</a>
+        </div>
+      </div>
+      <a href="contatti.html">Contatti</a>
+    </div>
+  </nav>
+
+  <!-- Sezione Chi Sono -->
+  <section id="chi-sono" data-anim style="--delay: 0.2s;">
+    <div class="background-wave"></div>
+    <h1>Chi Sono</h1>
+    <p>Sono un liutaio appassionato di chitarre artigianali. Creo strumenti unici fatti a mano, combinando design tradizionale e innovazione moderna. Ogni chitarra è realizzata con cura e attenzione ai dettagli, per offrire un suono caldo e avvolgente.</p>
+    <!-- Eventuali immagini o contenuti aggiuntivi possono andare qui -->
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

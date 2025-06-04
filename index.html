@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mirbol - Vetrina Chitarre</title>
+  <!-- Google Font per logo spaghettino -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <!-- Font per il sottotitolo -->
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Overlay di apertura con due linee animate e zoom finale -->
+  <div id="overlay">
+    <div class="overlay-text">
+      <h1>Mirbol</h1>
+      <p>ITALIAN HANDMADE<br>CUSTOM GUITARS</p>
+
+      <!-- SVG INLINE: due <rect> con classi line1 e line2 -->
+      <svg class="overlay-svg" preserveAspectRatio="none" viewBox="0 0 100 100">
+        <!-- line1: parte da Top-Left -->
+        <rect x="0" y="0" width="100" height="100"
+              fill="none" stroke="#fff" stroke-width="2"
+              pathLength="1"
+              stroke-dasharray="0 1"
+              stroke-dashoffset="0"
+              class="line1" />
+        <!-- line2: parte da Bottom-Right -->
+        <rect x="0" y="0" width="100" height="100"
+              fill="none" stroke="#fff" stroke-width="2"
+              pathLength="1"
+              stroke-dasharray="0 1"
+              stroke-dashoffset="0.5"
+              class="line2" />
+      </svg>
+    </div>
+  </div>
+
+  <!-- Barra di navigazione -->
+  <nav>
+    <a href="index.html" class="logo">Mirbol</a>
+    <span class="nav-toggle" onclick="toggleNav()">☰</span>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html#home">Home</a>
+      <a href="chi-sono.html">Chi Sono</a>
+      <div class="dropdown-item">
+        <a href="i-miei-lavori.html">I Miei Lavori</a>
+        <div class="submenu submenu-modelli">
+          <a href="i-miei-lavori.html#classica-tradizionale">Classica Tradizionale</a>
+          <a href="i-miei-lavori.html#classica-concert">Classica Concert</a>
+          <a href="i-miei-lavori.html#stratocaster-style">Stratocaster Style</a>
+          <a href="i-miei-lavori.html#telecaster-style">Telecaster Style</a>
+        </div>
+      </div>
+      <div class="dropdown-item">
+        <a href="i-legni.html">I Legni</a>
+        <div class="submenu submenu-legni">
+          <a href="i-legni.html#mogano">Mogano</a>
+          <a href="i-legni.html#palissandro">Palissandro</a>
+          <a href="i-legni.html#acero">Acero</a>
+          <a href="i-legni.html#abete">Abete</a>
+        </div>
+      </div>
+      <a href="contatti.html">Contatti</a>
+    </div>
+  </nav>
+
+  <!-- Sezione Home (SOLO qui, senza le altre sezioni) -->
+  <section id="home" data-anim style="--delay: 0.2s;">
+    <div class="background-wave"></div>
+    <h1>Benvenuto su Mirbol</h1>
+    <p>Sono un liutaio artigianale e questa è la mia galleria di chitarre. Sfoglia i modelli, scopri i legni e ascolta la mia passione.</p>
+    <div class="gallery">
+      <img src="images/c1.jpeg" alt="Chitarra Modello 1">
+      <img src="images/c2.jpeg" alt="Chitarra Modello 2">
+      <img src="images/c3.jpeg" alt="Chitarra Modello 3">
+      <!-- Aggiungi qui altre immagini se ne hai di più -->
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

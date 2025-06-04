@@ -1,0 +1,386 @@
+/* ================= Reset e Base ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  overflow-x: hidden;
+}
+
+/* ================= Overlay di apertura ================= */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #222;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+
+  /* punto di vista per la trasformazione 3D (zoom) */
+  perspective: 800px;
+
+  opacity: 1;
+  transition: opacity 0.7s ease;
+}
+#overlay.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Contenitore testo (logo + sottotitolo) */
+.overlay-text {
+  position: relative;
+  display: inline-block;
+  padding: 20px 30px;
+  transform-origin: center center;
+}
+
+/* ================= Animazione SVG “linee elastiche” ================= */
+.overlay-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+/* Ogni <rect> ha la propria keyframe: draw→hold→erase dal punto di partenza */
+.overlay-svg rect.line1 {
+  animation: drawLines1 2s ease-in-out forwards;
+  animation-delay: 0.3s;
+}
+.overlay-svg rect.line2 {
+  animation: drawLines2 2s ease-in-out forwards;
+  animation-delay: 0.3s;
+}
+
+/* ================= Keyframes per linee ================= */
+/* line1: da Top-Left (A) disegna fino a Bottom-Right (B),
+   poi scompare iniziando da A verso B */
+@keyframes drawLines1 {
+  0% {
+    stroke-dasharray: 0 1;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 0.5 0.5;
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dasharray: 0;
+    stroke-dashoffset: 0.5;
+  }
+}
+
+/* line2: da Bottom-Right (B) disegna fino a Top-Left (A),
+   poi scompare iniziando da B verso A */
+@keyframes drawLines2 {
+  0% {
+    stroke-dasharray: 0 1;
+    stroke-dashoffset: 0.5;
+  }
+  50% {
+    stroke-dasharray: 0.5 0.5;
+    stroke-dashoffset: 0.5;
+  }
+  100% {
+    stroke-dasharray: 0;
+    stroke-dashoffset: 1;
+  }
+}
+
+/* ================= Animazione “zoom verso lo schermo” ================= */
+/* Fa ingrandire e sparire il contenitore .overlay-text */
+.overlay-text {
+  animation: zoomLogo 0.7s ease-out forwards;
+  /* Lo zoom parte subito dopo che le linee hanno finito (2s) */
+  animation-delay: 2.3s;
+}
+
+/* Keyframes che scala da 1→5 (in “avanti”) e contemporaneamente fa sparire */
+@keyframes zoomLogo {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(5);
+    opacity: 0;
+  }
+}
+
+/* ================= Testo nel Overlay ================= */
+/* Partono da opacity: 0 e fanno un solo fade-in (forwards) */
+#overlay h1 {
+  opacity: 0;
+  font-family: 'Pacifico', cursive;
+  font-size: 4rem;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  text-transform: capitalize;
+  animation: fadeIn 1s ease-out forwards;
+}
+
+#overlay p {
+  opacity: 0;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1rem;
+  color: #fff;
+  margin-top: 1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: fadeIn 1s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
+/* Keyframes generico fade-in */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ================= Navbar e Sezioni ================= */
+nav {
+  width: 100%;
+  background: #222;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+}
+.logo {
+  font-family: 'Pacifico', cursive;
+  font-size: 1.8rem;
+  color: #fff;
+  text-decoration: none;
+  position: relative;
+}
+.logo::after {
+  content: "ITALIAN HANDMADE CUSTOM GUITARS";
+  display: block;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.8rem;
+  color: #fff;
+  letter-spacing: 2px;
+  margin-top: 4px;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  position: relative;
+}
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s;
+  font-weight: 500;
+  padding: 0.5rem;
+}
+.nav-links a:hover {
+  color: #ffcc00;
+}
+.dropdown-item {
+  position: relative;
+}
+.submenu {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  display: none;
+  z-index: 500;
+  min-width: 200px;
+}
+.dropdown-item:hover .submenu {
+  display: block;
+}
+.submenu a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #333;
+  text-decoration: none;
+  transition: background 0.3s;
+  white-space: nowrap;
+}
+.submenu a:hover {
+  background: #f0f0f0;
+}
+.submenu-modelli { left: 0; }
+.submenu-legni   { left: 0; }
+
+section {
+  min-height: 100vh;
+  padding: 6rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background-color: #fff;
+}
+section[data-anim] {
+  opacity: 0;
+  transform: translateY(50px);
+  animation: fadeInUp 1s forwards;
+  animation-delay: var(--delay, 0.3s);
+}
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+h1 {
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  color: #222;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+}
+h1::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: #ffcc00;
+  margin-top: 0.5rem;
+  border-radius: 2px;
+}
+p {
+  max-width: 700px;
+  text-align: center;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  color: #333;
+}
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+.gallery img {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: rgba(0,0,0,0.1) 0px 4px 12px;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+.gallery img:hover {
+  transform: scale(1.05);
+}
+.item-card {
+  width: 250px;
+  margin: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  transition: transform 0.3s;
+  background: #fafafa;
+  cursor: pointer;
+}
+.item-card:hover {
+  transform: translateY(-5px);
+}
+.item-card img {
+  width: 100%;
+  display: block;
+}
+.item-card h3 {
+  font-size: 1.1rem;
+  padding: 0.5rem;
+  text-align: center;
+  background: #f0f0f0;
+}
+.contact-form {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+}
+.contact-form label {
+  margin: 0.5rem 0 0.2rem;
+  font-weight: bold;
+}
+.contact-form input,
+.contact-form textarea {
+  padding: 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  font-size: 1rem;
+}
+.contact-form button {
+  margin-top: 1rem;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 4px;
+  background: #ffcc00;
+  color: #222;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.contact-form button:hover {
+  background: #e6b800;
+}
+.background-wave {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background: rgba(255, 204, 0, 0.1);
+  border-radius: 50%;
+  animation: float 10s infinite ease-in-out;
+  z-index: -1;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0) translateX(0) scale(1); }
+  50% { transform: translateY(-30px) translateX(-20px) scale(1.1); }
+}
+@media (max-width: 768px) {
+  .gallery img {
+    width: 90%;
+    height: auto;
+  }
+  .nav-links {
+    flex-direction: column;
+    background: #222;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 200px;
+    transform: translateX(100%);
+    transition: transform 0.3s;
+  }
+  .nav-links.open {
+    transform: translateX(0);
+  }
+}
