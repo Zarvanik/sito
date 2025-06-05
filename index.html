@@ -12,7 +12,7 @@
 </head>
 <body>
   <!-- Overlay di apertura con due linee animate e zoom finale -->
-  <div id="overlay">
+  <div id="overlay" style="display: none;">
     <div class="overlay-text">
       <img src="images/logo.png" alt="Mirbol" class="overlay-logo">
       <p>ITALIAN HANDMADE<br>CUSTOM GUITARS</p>
@@ -80,6 +80,11 @@
     </div>
   </section>
 
-  <script src="script.js"></script>
+ <script>
+    if (sessionStorage.getItem('mirbolIntroShown') !== 'true') {
+      document.getElementById('overlay').style.display = 'flex';
+    }
+</script>
+<script src="script.js"></script>
 </body>
 </html>
