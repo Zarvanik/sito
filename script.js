@@ -1,12 +1,18 @@
-// Nasconde l'overlay dopo un ritardo
 document.addEventListener('DOMContentLoaded', () => {
-  setTimeout(() => {
-    const overlay = document.getElementById('overlay');
-    overlay.classList.add('fade-out');
-    // 700 ms corrispondono alla durata della transizione di opacity
-    setTimeout(() => { overlay.style.display = 'none'; }, 700);
-  }, 2300); // 2.3 secondi di ritardo
+  const overlay = document.getElementById('overlay');
+  const logoContainer = document.querySelector('.overlay-text');
 
+  // Al termine dell’animazione CSS "zoomLogo" su .overlay-text:
+  logoContainer.addEventListener('animationend', (event) => {
+    // Se l'animazione finita è esattamente "zoomLogo"
+    if (event.animationName === 'zoomLogo') {
+      overlay.classList.add('fade-out');
+      // Dopo che il fade-out (0.7s) è completato, nascosto completely
+      setTimeout(() => {
+        overlay.style.display = 'none';
+      }, 700);
+    }
+  });
   // Animazione delle sezioni
   const sections = document.querySelectorAll('section[data-anim]');
   sections.forEach((sec, idx) => {
